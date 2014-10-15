@@ -64,7 +64,7 @@ usb_setup() {
       write $ANDROID_USB/enable        0
       write $ANDROID_USB/functions     ""
       write $ANDROID_USB/enable        1
-      usleep 500000 # 0.5 delay to attempt to remove rndis function
+      sleep 1 # 1 sec delay to attempt to remove rndis function
       write $ANDROID_USB/enable        0
       write $ANDROID_USB/idVendor      18D1
       write $ANDROID_USB/idProduct     D001
@@ -87,6 +87,7 @@ run_debug_session() {
     CUSTOMPRODUCT=$1
     echo "########################## Debug session : $1"
     usb_setup "Mer Debug setting up (DONE_SWITCH=$DONE_SWITCH)"
+    sleep 5
 
     USB_IFACE=notfound
     /sbin/ifconfig usb0   $LOCAL_IP && USB_IFACE=usb0
